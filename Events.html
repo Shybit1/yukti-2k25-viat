@@ -1,0 +1,574 @@
+<style>
+    :root {
+        --primary-color: #8a2be2;
+        --secondary-color: #00ffff;
+        --background-dark: #121212;
+        --text-primary: #ffffff;
+        --text-secondary: #b3b3b3;
+        --card-bg: #1e1e1e;
+        --nav-bg: rgba(18, 18, 18, 0.9);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: var(--background-dark);
+        color: var(--text-primary);
+        overflow-x: hidden;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+
+    .nav-links li {
+        margin-left: 2rem;
+    }
+
+    .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        position: relative;
+    }
+
+    .nav-links a:hover {
+        color: var(--secondary-color);
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--secondary-color);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+        z-index: -1;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+        z-index: 1;
+    }
+
+    .hero h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: var(--text-primary);
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin: 0 1rem;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+    }
+
+    .about {
+        padding: 5rem 0;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        position: relative;
+        color: var(--text-primary);
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .events {
+        padding: 5rem 0;
+        background-color: rgba(30, 30, 30, 0.5);
+    }
+
+    .event-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .event-card {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .event-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+    }
+
+    .event-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .event-content {
+        padding: 1.5rem;
+    }
+
+    .event-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+
+    .event-content p {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+    }
+
+    .sponsors {
+        padding: 5rem 0;
+    }
+
+    .sponsor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .sponsor-logo {
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s;
+    }
+
+    .sponsor-logo:hover {
+        transform: scale(1.05);
+    }
+
+    .sponsor-logo img {
+        max-width: 100%;
+        filter: grayscale(100%) brightness(1.5);
+        transition: filter 0.3s;
+    }
+
+    .sponsor-logo:hover img {
+        filter: grayscale(0%) brightness(1);
+    }
+
+    .contact {
+        padding: 5rem 0;
+        background-color: rgba(30, 30, 30, 0.5);
+    }
+
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--card-bg);
+        border: 1px solid #333;
+        border-radius: 5px;
+        color: var(--text-primary);
+        font-size: 1rem;
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    footer {
+        background-color: #0a0a0a;
+        padding: 2rem 0;
+        text-align: center;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .social-links a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+        margin: 0 0.5rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-5px);
+    }
+
+    .copyright {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .floating {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 3rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+    }
+
+    .btn-register {
+        display: block;
+        width: fit-content;
+        margin: 1rem auto;
+        padding: 0.8rem 2rem;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: var(--text-primary);
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-register:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+    }
+
+    .event-details {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .event-category {
+        margin-bottom: 4rem;
+    }
+
+    .event-category h3 {
+        margin-bottom: 2rem;
+    }
+    .category-events {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2.5rem;
+    }
+</style>
+<section id="all-events" class="all-events">
+    <div class="container">
+        <h2 class="section-title">All Events</h2>
+        <div class="events-grid">
+            <!-- Entertainment Events -->
+            <div class="event-category">
+                <h3>Entertainment</h3>
+                <div class="category-events">
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/vogue-vortex.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Vogue Vortex</h4>
+                            <p>Ramp Walk</p>
+                            <a href="#" class="btn-register" data-event="vogue-vortex">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/rhythmic-rapture.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Rhythmic Rapture</h4>
+                            <p>Solo & Group Dance</p>
+                            <a href="#" class="btn-register" data-event="rhythmic-rapture">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/harmonic-echoes.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Harmonic Echoes</h4>
+                            <p>Solo & Group Singing</p>
+                            <a href="#" class="btn-register" data-event="harmonic-echoes">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/beats-battle.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Beats Battle</h4>
+                            <p>DJ & Beat Boxing</p>
+                            <a href="#" class="btn-register" data-event="beats-battle">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/mic-mavericks.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Mic Mavericks</h4>
+                            <p>Stand-up Comedy</p>
+                            <a href="#" class="btn-register" data-event="mic-mavericks">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/echo-act.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Echo Act</h4>
+                            <p>Mimicry</p>
+                            <a href="#" class="btn-register" data-event="echo-act">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/flame-free-feast.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Flame-Free Feast</h4>
+                            <p>Cooking without Fire</p>
+                            <a href="#" class="btn-register" data-event="flame-free-feast">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arts Events -->
+            <div class="event-category">
+                <h3>Arts</h3>
+                <div class="category-events">
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/chromacanvas.jpg')"></div>
+                        <div class="event-details">
+                            <h4>ChromaCanvas</h4>
+                            <p>Face Painting</p>
+                            <a href="#" class="btn-register" data-event="chromacanvas">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/flow-of-strokes.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Flow of Strokes</h4>
+                            <p>Rangoli/Sketch Art</p>
+                            <a href="#" class="btn-register" data-event="flow-of-strokes">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/ecocraft-mastery.jpg')"></div>
+                        <div class="event-details">
+                            <h4>EcoCraft Mastery</h4>
+                            <p>Art out of Waste</p>
+                            <a href="#" class="btn-register" data-event="ecocraft-mastery">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/brandcrafters.jpg')"></div>
+                        <div class="event-details">
+                            <h4>BrandCrafters</h4>
+                            <p>Logo Design</p>
+                            <a href="#" class="btn-register" data-event="brandcrafters">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/shutterscape.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Shutterscape</h4>
+                            <p>Photography</p>
+                            <a href="#" class="btn-register" data-event="shutterscape">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Games Events -->
+            <div class="event-category">
+                <h3>Games</h3>
+                <div class="category-events">
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/lost-legacy.jpg')"></div>
+                        <div class="event-details">
+                            <h4>The Lost Legacy</h4>
+                            <p>Treasure Hunt</p>
+                            <a href="#" class="btn-register" data-event="lost-legacy">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/battle-royale.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Battle Royale</h4>
+                            <p>BGMI Gaming</p>
+                            <a href="#" class="btn-register" data-event="battle-royale">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other categories following the same pattern -->
+            <!-- Mechanical & Aerospace Events -->
+            <div class="event-category">
+                <h3>Mechanical & Aerospace</h3>
+                <div class="category-events">
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/mechasprint.jpg')"></div>
+                        <div class="event-details">
+                            <h4>MechaSprint</h4>
+                            <p>Robo Race</p>
+                            <a href="#" class="btn-register" data-event="mechasprint">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/skyhawks-arena.jpg')"></div>
+                        <div class="event-details">
+                            <h4>Skyhawks Arena</h4>
+                            <p>Drone Race</p>
+                            <a href="#" class="btn-register" data-event="skyhawks-arena">Register</a>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('images/events/aerovista.jpg')"></div>
+                        <div class="event-details">
+                            <h4>AeroVista</h4>
+                            <p>Flight Glider & Paraglider</p>
+                            <a href="#" class="btn-register" data-event="aerovista">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
